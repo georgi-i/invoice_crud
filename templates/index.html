@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block body %}
+
+<div class="container mt-5 d-flex justify-content-center">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link text-success {{'active' if active_home }}" id="home-tab" href="/">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-success {{'active' if active_create }}" id="create-invoice-tab" href="create-invoice">Create</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-success {{'active' if active_search }}" id="search-invoice-tab" href="search-invoice">Search/Export</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-success {{'active' if active_edit }}" id="edit-invoice-tab" href="edit-invoice">Edit/Delete</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-success" id="logout-tab" href="/logout">Logout</a>
+    </li>
+  </ul>
+</div> 
+{% block div %}{% endblock %}  
+
+    
+{% endblock %}

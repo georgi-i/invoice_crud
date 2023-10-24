@@ -1,0 +1,47 @@
+body {
+    background-color: #E5E4E2;
+    font-family:   "Lucida Console", "Courier New", monospace;
+}
+
+.small.text-center.text-muted {
+    margin-top: 100px;
+}
+
+#invoice {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 107px;
+    margin-top: 70px;
+}
+
+
+.d-flex.flex-column.justify-content-center.mt-5 {
+    width:auto;
+}
+
+.nav-link.active, .nav-link:hover {
+    background-color: #E5E4E2 !important;
+    border-color: #3c763d !important;
+}
+
+.welcome {
+    color: black;
+    font-weight: bold;
+}
+
+.nav-tabs {
+    border-radius: 1.4rem !important;
+}
+
+a.page-link[aria-current="page"] {
+    background-color: #3db733;
+}
+
+a.page-link[aria-current="page"]:hover {
+    background-color: #1d8214;
+}
+
+#confirm {
+    display: none;
+}

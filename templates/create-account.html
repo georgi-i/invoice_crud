@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Create Account
+{% endblock %}
+
+{% block body %}
+
+<div class="container mt-5">
+    <form action="/create-account" method="post" class="row mt-5 d-flex justify-content-center">
+        <div class="d-flex flex-column justify-content-center mt-5">
+          <div class="p-2 form-group has-feedback">
+            <i class="p-2 glyphicon glyphicon-user form-control-feedback"></i>
+            <input autocomplete="off" type="text" name="username" class="form-control text-center" placeholder="Username" required/>
+          </div>
+          <div class="p-2 form-group has-feedback">
+            <i class="p-2 glyphicon glyphicon-lock form-control-feedback"></i>
+            <input autocomplete="off" type="password" name="password" class="form-control text-center" placeholder="Password" required/>
+          </div>
+          <div class="p-2 form-group has-feedback">
+            <i class="p-2 glyphicon glyphicon-lock form-control-feedback"></i>
+            <input autocomplete="off" type="password" name="confirm-password" class="form-control text-center" placeholder="Confirm Password" required/>
+          </div>
+          <div class="p-2 text-center">
+            <button type="submit" class="btn btn-success">&check;</button>
+          </div>
+        </div>
+
+    </form>
+    
+    <div class="container mt-5 d-flex justify-content-center">
+      {% if blank_credentials %}
+        <p class="text-danger">Please provide username and/or password</p>
+      {% elif already_exist %}
+        <p class="text-danger">Username {{ username }} already exist</p>
+      {% elif identical %}
+        <p class="text-danger">Please provide identical passwords</p>
+      {% elif created %}
+        <p class="text-success">User was successfully created.</p>
+        <div><a href="/" class="badge bg-success">Login</a></div>
+      {% endif %}
+    </div>   
+</div>   
+
+    
+{% endblock %}

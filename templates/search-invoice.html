@@ -1,0 +1,52 @@
+{% extends "index.html" %}
+
+
+{% block div %}
+<div class="container mt-5 d-flex justify-content-center">
+  <form action="/search-invoice" method="post" class="mt-5">
+    <table id="search-invoice" class="table table-striped mt-5">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Invoice ID</th>
+          <th>Date of Issue</th>
+          <th>Company Name</th>
+          <th>Company Address</th>
+          <th>Billed To</th>
+          <th>Billing Address</th>
+          <th>Invoice Created By</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in invoices %}
+          <tr>
+            <td><input type="checkbox" name="invoice"></td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[7] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+            <td>{{ row[5] }}</td>
+            <td>{{ row[6] }}</td>
+            <td>{{ row[9] }}</td>
+          </tr>  
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-center"><button type="submit" class="btn btn-success mt-5" name="export">Export Selected</button></div>
+    <input type="hidden" name="export-number" value="">
+  </form>
+</div>
+{% if exported %}
+  <div class="container mt-5 d-flex justify-content-center">
+    <p class="text-success">Invoice {{ invoice_id }} was successfully exported in folder "exported".</p>
+  </div>
+  <div class="container mt-5 d-flex justify-content-center">
+      <form action="/exported" method="post">
+      <p class="text-success">Open the PDF file &#8594;<button type="sumbit" class="btn btn-link">invoice_{{ invoice_id }}.pdf</button></p>
+      <input type="hidden" name="exported_invoice" value="invoice_{{ invoice_id }}.pdf">
+    </form>
+  </div>
+{% endif %}
+{% endblock %} 
+
+

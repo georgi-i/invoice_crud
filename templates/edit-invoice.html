@@ -1,0 +1,108 @@
+{% extends "index.html" %}
+
+
+{% block div %}
+{% if query %}
+  <div class="container mt-5 d-flex justify-content-center">
+    <form action="/edit-invoice" method="post" class="mt-5">
+      <div class="row">
+        <div class="mt-5 mb-5 text-success">
+          <span class="badge bg-success">Invoice Number</span>
+          <span class="badge bg-success col-sm-offset-2">Date of Issue</span>
+        </div>
+        <div class="form-group col-sm-3">
+          <input type="number" class="form-control" name="invoice-number" value="{{ invoice[1] }}" readonly>
+        </div>
+        <div class="form-group col-sm-4">
+          <input type="date" class="form-control" name="invoice-date" value="{{ invoice[7] }}" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="mt-5 mb-5 text-success">
+          <span class="badge bg-success">Company Details</span>
+          <span class="badge bg-success float-end">Billed To</span>
+        </div>
+        <div class="form-group col-sm-4">
+          <input type="text" class="form-control" name="company-name" value="{{ invoice[2] }}" required>
+        </div>
+        <div class="form-group col-sm-4 col-sm-offset-4">
+          <input type="text" class="form-control" name="billed-name" value="{{ invoice[5] }}" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <input type="url" class="form-control" name="company-website" value="{{ invoice[4] }}" required>
+        </div>
+        <div class="form-group col-sm-4 col-sm-offset-4">
+          <input type="text" class="form-control" name="billed-address" value="{{ invoice[6] }}" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-5">
+          <input type="text" class="form-control" name="company-address" value="{{ invoice[3] }}" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="mt-5 mb-5 text-success">
+          <span class="badge bg-success">Description of Products</span>
+        </div>
+        <div class="row form-group">
+          <div class="col-sm-5"><input type="text" class="form-control" id="description" placeholder="Description"></div>
+          <div class="col-sm-2"><input type="number" class="form-control" id="cost" placeholder="Unit Cost"></div>
+          <div class="col-sm-2"><input type="number" class="form-control" id="quantity" placeholder="Quantity"></div>
+          <div class="col-sm-1"><button type="button" class="btn btn-success" id="add">Add</button></div>
+          <div class="col-sm-1"><button type="button" class="btn btn-success" id="remove">Remove</button></div>
+        </div>
+      </div>
+      <table class="table table-striped mt-5">
+        <thead class="thread-light">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Description</th>
+            <th scope="col">Unit Cost</th>
+            <th scope="col">Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for row in products %}
+          <tr>
+            <td><input type='checkbox' name='product'></td>
+            <td><input type="text" name="description" value="{{ row[1] }}"></td>
+            <td><input type="number" name="cost" value="{{ row[2] }}"></td>
+            <td><input type="number" name="quantity" value="{{ row[3] }}"></td>
+          </tr>  
+        {% endfor %}
+        </tbody>
+      </table>
+      <div class="mt-5 text-center"><button type="submit" class="btn btn-success" name="update">Edit Invoice</button></div>
+    </form>
+  </div>
+{% else %}
+  <div class="container mt-5 d-flex justify-content-center">
+    <form action="/edit-invoice" method="post" class="mt-5">
+      <div class="form-group mx-sm-3 mb-2">
+        <input type="text" class="form-control mb-5" name="invoice-number" placeholder="Invoice ID" required>
+      </div>
+      <button type="submit" class="btn btn-warning" name="edit">Edit Invoice</button>
+      <button type="button" class="btn btn-danger" name="delete" id="delete">Delete Invoice</button>
+      <button type="submit" class="btn btn-danger" name="confirm" id="confirm">Confirm</button>
+    </form>
+  </div>
+  {% if edited %}
+    <div class="container mt-5 d-flex justify-content-center">
+      <p class="text-success">Invoice {{ invoice_id }} was successfully edited.</p>
+    </div>
+  {% elif deleted %}
+    <div class="container mt-5 d-flex justify-content-center">
+      <p class="text-success">Invoice {{ invoice_id }} was successfully deleted.</p>
+    </div>
+  {% elif not_found %}
+    <div class="container mt-5 d-flex justify-content-center">
+      <p class="text-danger">Invoice {{ invoice_id }} doesn't exist.</p>
+    </div>
+  {% endif %}
+{% endif %}
+
+{% endblock %} 
+
+
